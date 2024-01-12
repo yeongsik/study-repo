@@ -21,17 +21,8 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
     <script type="text/babel">
-      const element = React.createElement("h1", null, "Hello world");
-      console.log('react', element);
-
+      const element = <h1>Hello world</h1>;
       ReactDOM.render(element, document.querySelector("#app"));
-
-      const p = document.createElement('p');
-      p.textContent = "Hello world";
-
-      console.log('dom', p);
-
-      document.body.appendChild(p);
     </script>
   </body>
 </html>
