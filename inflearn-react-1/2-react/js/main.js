@@ -17,6 +17,15 @@ class App extends React.Component {
         };
     }
 
+    handleChangeInput(event) {
+        // 리액트에서 이벤트를 처리하는 메서드는 앞에 handle을 붙인다.
+
+        // 컴포넌트의 상태를 변경하려면 setState 써야한다.
+        this.setState({
+            searchKeyword: event.target.value
+        });
+    }
+
     render() {
         return (
             <>
@@ -30,6 +39,9 @@ class App extends React.Component {
                             placeholder="검색어를 입력하세요."
                             autoFocus
                             value={this.state.searchKeyword}
+                            onChange={event => {
+                                this.handleChangeInput(event);
+                            }}
                         />
                         <button type="reset" className="btn-reset"></button>
                     </form>
@@ -38,7 +50,6 @@ class App extends React.Component {
         );
     }
 }
-
 
 // 브라우저 상태 관리가 아닌 리액트만의 상태관리가 필요하다.
 ReactDOM.render(<App />, document.querySelector("#app"));
