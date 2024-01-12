@@ -21,9 +21,9 @@ class App extends React.Component {
         // 리액트에서 이벤트를 처리하는 메서드는 앞에 handle을 붙인다.
 
         // 컴포넌트의 상태를 변경하려면 setState 써야한다.
-        this.setState({
-            searchKeyword: event.target.value
-        });
+        const searchKeyword = event.target.value;
+        this.setState({searchKeyword});
+
     }
 
     render() {
@@ -43,7 +43,9 @@ class App extends React.Component {
                                 this.handleChangeInput(event);
                             }}
                         />
-                        <button type="reset" className="btn-reset"></button>
+                        {this.state.searchKeyword.length > 0 && (
+                            <button type="reset" className="btn-reset"></button>
+                        )}
                     </form>
                 </div>
             </>
