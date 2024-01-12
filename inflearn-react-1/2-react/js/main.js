@@ -6,20 +6,25 @@
 // class를 사용할 수 없는 이유는 자바스크립트에서 사용하는 예약어 이기 때문에 jsx에서는 className을 사용한다.
 // 리액트 엘리먼트는 루트 노드가 있어야 한다.
 // <> </> fragment는 리얼돔에 반영이 되지 않는다.
-const element = (
-    <>
-        <header>
-            <h2 className="container">검색</h2>
-        </header>
-        <div className="container">
-            <form id="search-form-view">
-                <input type="text" placeholder="검색어를 입력하세요." autoFocus/>
-                <button type="reset" className="btn-reset"></button>
-            </form>
-        </div>
-    </>
-);
+
+class App extends React.Component {
+    render() {
+        return (
+            <>
+                <header>
+                    <h2 className="container">검색</h2>
+                </header>
+                <div className="container">
+                    <form id="search-form-view">
+                        <input type="text" placeholder="검색어를 입력하세요." autoFocus/>
+                        <button type="reset" className="btn-reset"></button>
+                    </form>
+                </div>
+            </>
+        );
+    }
+}
+
 
 // 브라우저 상태 관리가 아닌 리액트만의 상태관리가 필요하다.
-
-ReactDOM.render(element, document.querySelector("#app"));
+ReactDOM.render(<App />, document.querySelector("#app"));
