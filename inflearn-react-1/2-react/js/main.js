@@ -17,7 +17,7 @@ class App extends React.Component {
         this.state = {
             searchKeyword: "",
             searchResult: [],
-            submiited: false,
+            submitted: false,
 
         };
     }
@@ -28,7 +28,7 @@ class App extends React.Component {
         // 컴포넌트의 상태를 변경하려면 setState 써야한다.
         const searchKeyword = event.target.value;
 
-        if (searchKeyword.length <= 0) {
+        if (searchKeyword.length <= 0 && this.state.submitted) {
             return this.handleReset();
         }
 
@@ -42,21 +42,24 @@ class App extends React.Component {
 
     search(searchKeyword) {
         const searchResult = store.search(searchKeyword);
-        this.setState({searchResult, submiited:true});
+        this.setState({searchResult, submitted:true});
     }
 
     handleReset() {
-        this.setState({searchKeyword: ""});
+        this.setState({
+            searchKeyword: "",
+            submitted: false
+        });
         // setState는 항상 비동기로 동작한다. 다음 코드에서 state값이 바로 반영되지 않는다.
         // 여러번 setState를 호출하더라도 모아놨다가 나중에 늦게 호출한다.
         // 나중에 최소한의 변경만 하기 위해서 늦게 state를 반영한다.
 
         // setState가 완료된 시점에서 console.log를 찍어보자
-        this.setState(() => {
-            return {searchKeyowrd: ""}
-        }, () => {
-            console.log("TODO: handleReset", this.state.searchKeyword);
-        });
+        // this.setState(() => {
+        //     return {searchKeyowrd: ""}
+        // }, () => {
+        //     console.log("TODO: handleReset", this.state.searchKeyword);
+        // });
 
     }
 
@@ -85,7 +88,7 @@ class App extends React.Component {
                         )}
                     </form>
                     <div className="content">
-                        {this.state.submiited &&
+                        {this.state.submitted &&
                             (this.state.searchResult.length > 0 ? (
                                 <ul className="result">
                                     {this.state.searchResult.map(item => {
