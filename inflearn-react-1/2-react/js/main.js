@@ -1,3 +1,5 @@
+import store from "./js/Store.js";
+
 // 자바스크립트 코드의 시작점
 // 이후에 모듈별로 만들어서 추가할 예정
 
@@ -33,7 +35,12 @@ class App extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        console.log("TODO: handleSubmit", this.state.searchKeyword);
+        this.search(this.state.searchKeyword);
+    }
+
+    search(searchKeyword) {
+        const searchResult = store.search(searchKeyword);
+        this.setState({searchResult});
     }
 
     handleReset() {
@@ -77,7 +84,16 @@ class App extends React.Component {
                     </form>
                     <div className="content">
                         {this.state.searchResult.length > 0 ? (
-                            <div>TODO : 검색 결과 목록 표시하기 </div>
+                            <ul className="result">
+                                {this.state.searchResult.map(item => {
+                                    return (
+                                        <li>
+                                            <img src={item.imageUrl} alt={item.name}/>
+                                            <p>{item.name}</p>
+                                        </li>
+                                    )
+                                })}
+                            </ul>
                         ) : (
                             <div className="empty-box">검색 결과가 없습니다.</div>
                         )}
