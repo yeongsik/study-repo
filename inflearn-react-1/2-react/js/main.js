@@ -17,6 +17,8 @@ class App extends React.Component {
         this.state = {
             searchKeyword: "",
             searchResult: [],
+            submiited: false,
+
         };
     }
 
@@ -40,7 +42,7 @@ class App extends React.Component {
 
     search(searchKeyword) {
         const searchResult = store.search(searchKeyword);
-        this.setState({searchResult});
+        this.setState({searchResult, submiited:true});
     }
 
     handleReset() {
@@ -83,20 +85,21 @@ class App extends React.Component {
                         )}
                     </form>
                     <div className="content">
-                        {this.state.searchResult.length > 0 ? (
-                            <ul className="result">
-                                {this.state.searchResult.map(item => {
-                                    return (
-                                        <li>
-                                            <img src={item.imageUrl} alt={item.name}/>
-                                            <p>{item.name}</p>
-                                        </li>
-                                    )
-                                })}
-                            </ul>
-                        ) : (
-                            <div className="empty-box">검색 결과가 없습니다.</div>
-                        )}
+                        {this.state.submiited &&
+                            (this.state.searchResult.length > 0 ? (
+                                <ul className="result">
+                                    {this.state.searchResult.map(item => {
+                                        return (
+                                            <li key={item.id}>
+                                                <img src={item.imageUrl} alt={item.name}/>
+                                                <p>{item.name}</p>
+                                            </li>
+                                        )
+                                    })}
+                                </ul>
+                            ) : (
+                                <div className="empty-box">검색 결과가 없습니다.</div>
+                            ))}
                     </div>
                 </div>
             </>
