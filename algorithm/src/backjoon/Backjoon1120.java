@@ -19,22 +19,16 @@ public class Backjoon1120 {
         char[] A = st.nextToken().toCharArray();
         char[] B = st.nextToken().toCharArray();
 
-        int firstDiff = 0;
-
-        for (int i = 0; i < A.length; i++) {
-            if (A[i] != B[i]) {
-                firstDiff++;
+        int min = Integer.MAX_VALUE;
+        for (int i = 0; i <= B.length - A.length; i++) {
+            int cnt = 0;
+            for (int j = 0; j < A.length; j++) {
+                if (A[j] != B[i + j]) {
+                    cnt++;
+                }
             }
+            min = Math.min(min, cnt);
         }
-
-        int secondDiff = 0;
-        for (int i = B.length - 1; i >= B.length - A.length ; i--) {
-            if (A[i - (B.length - A.length)] != B[i]) {
-                secondDiff++;
-            }
-        }
-
-        System.out.println(Math.min(firstDiff, secondDiff));
-
+        System.out.println(min);
     }
 }
