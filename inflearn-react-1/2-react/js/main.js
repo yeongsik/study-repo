@@ -1,4 +1,5 @@
 import store from "./js/Store.js";
+import {formatRelativeDate} from "./js/helpers.js";
 
 // 자바스크립트 코드의 시작점
 // 이후에 모듈별로 만들어서 추가할 예정
@@ -31,12 +32,17 @@ class App extends React.Component {
             submitted: false,
             selectedTab: TabType.KEYWORD,
             keywordList: [],
+            historyList: [],
         };
     }
 
     componentDidMount() {
         const keywordList = store.getKeywordList();
-        this.setState({keywordList});
+        const historyList = store.getHistoryList();
+        this.setState({
+            keywordList,
+            historyList,
+        });
     }
 
     handleChangeInput(event) {
@@ -59,10 +65,13 @@ class App extends React.Component {
 
     search(searchKeyword) {
         const searchResult = store.search(searchKeyword);
+        const historyList = store.getHistoryList();
+
         this.setState({
-            searchResult,
-            submitted:true,
             searchKeyword,
+            searchResult,
+            historyList,
+            submitted: true,
         });
     }
 
@@ -81,6 +90,13 @@ class App extends React.Component {
         // }, () => {
         //     console.log("TODO: handleReset", this.state.searchKeyword);
         // });
+    }
+
+    handleClickRemoveHistory(event, keyword) {
+        event.stopPropagation();
+        store.removeHistory(keyword);
+        const historyList = store.getHistoryList();
+        this.setState({historyList});
     }
 
     render() {
@@ -123,12 +139,26 @@ class App extends React.Component {
         const keywordList = (
             <ul className="list">
                 {this.state.keywordList.map(({id, keyword}, index) => {
-
                     return (
                         <li key={id}
                             onClick={() => this.search(keyword)}>
                             <span className="number">{index + 1}</span>
                             <span>{keyword}</span>
+                        </li>
+                    )
+                })}
+            </ul>
+        );
+
+        const historyList = (
+            <ul className="list">
+                {this.state.historyList.map(({id, keyword, date}) => {
+                    return (
+                        <li key={id} onClick={() => this.search(keyword)}>
+                            <span>{keyword}</span>
+                            <span className="date">{formatRelativeDate(date)}</span>
+                            <button className="btn-remove"
+                                    onClick={(event) => this.handleClickRemoveHistory(event, keyword)}></button>
                         </li>
                     )
                 })}
@@ -153,7 +183,7 @@ class App extends React.Component {
                     })}
                 </ul>
                 {this.state.selectedTab === TabType.KEYWORD && keywordList}
-                {this.state.selectedTab === TabType.HISTORY && <>TODO: 최근 검색어</>}
+                {this.state.selectedTab === TabType.HISTORY && historyList}
             </>
         );
 
