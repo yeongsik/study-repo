@@ -3,9 +3,23 @@ import Header from "./components/Header";
 import SearchForm from "./components/SearchForm";
 
 export default class App extends React.Component {
+    constructor() {
+        super();
 
-    search(searchKeyword) {
-        console.log(searchKeyword);
+        this.state = {
+            searchKeyword: "",
+        }
+    }
+
+    search() {
+        console.log(this.state.searchKeyword);
+    }
+
+    handleChangeInput(searchKeyword) {
+        if (searchKeyword.length <= 0) {
+            this.handleReset();
+        }
+        this.setState({searchKeyword});
     }
 
     handleReset() {
@@ -19,7 +33,9 @@ export default class App extends React.Component {
                 <Header title="검색"/>
                 <div className="container">
                     <SearchForm
-                        onSubmit={(searchKeyword) => this.search(searchKeyword)}
+                        value={this.state.searchKeyword}
+                        onChange={(value) => this.handleChangeInput(value)}
+                        onSubmit={() => this.search()}
                         onReset={() => this.handleReset()}
                     />
                 </div>
