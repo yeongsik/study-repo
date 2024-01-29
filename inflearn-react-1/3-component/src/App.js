@@ -4,6 +4,8 @@ import SearchForm from "./components/SearchForm";
 import SearchResult from "./components/SearchResult";
 import store from "./Store.js"
 import Tabs, {TabType} from "./components/Tabs";
+import KeywordList from "./components/KeywordList.js";
+import HistoryList from "./components/HistoryList";
 
 export default class App extends React.Component {
     constructor() {
@@ -17,10 +19,11 @@ export default class App extends React.Component {
         };
     }
 
-    search() {
-        const searchResult = store.search(this.state.searchKeyword);
+    search(searchKeyword) {
+        const searchResult = store.search(searchKeyword);
 
         this.setState({
+            searchKeyword,
             searchResult,
             submitted: true,
         });
@@ -51,7 +54,7 @@ export default class App extends React.Component {
                     <SearchForm
                         value={searchKeyword}
                         onChange={(value) => this.handleChangeInput(value)}
-                        onSubmit={() => this.search()}
+                        onSubmit={() => this.search(searchKeyword)}
                         onReset={() => this.handleReset()}
                     />
                     <div className="content">
@@ -59,9 +62,15 @@ export default class App extends React.Component {
                             <SearchResult data={searchResult} />
                         ) : (
                             <>
-                                <Tabs selectedTab={selectedTab} onChange={(selectedTab) => this.setState({selectedTab})} />
-                                {selectedTab === TabType.KEYWORD && <>TODO:추천검색어 목록 </>}
-                                {selectedTab === TabType.HISTORY && <>TODO:최근검색어 목록 </>}
+                                <Tabs
+                                    selectedTab={selectedTab}
+                                    onChange={(selectedTab) => this.setState({selectedTab})} />
+                                {selectedTab === TabType.KEYWORD && (
+                                    <KeywordList onClick={keyword => this.search(keyword)}/>
+                                )}
+                                {selectedTab === TabType.HISTORY && (
+                                    <HistoryList onClick={keyword => this.search(keyword)}/>
+                                )}
                             </>
 
                         )}
