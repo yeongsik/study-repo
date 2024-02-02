@@ -3,30 +3,35 @@ package com.hodolog.api.controller;
 
 import com.hodolog.api.request.PostCreate;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
 @Slf4j
 public class PostController {
-    /*
-        HTTP METHOD
-        GET POST PUT PATCH DELETE OPTIONS HEAD TRACE CONNECT
-        각 특징 알기
-    */
-
-
-    /*
-    예전 방식
-    @RequestMapping(method = RequestMethod.GET, path="/v1/posts")
-    * */
 
     @PostMapping("/posts")
-    public String post(@RequestBody PostCreate postCreate) {
+    public Map<String, String> post(@RequestBody @Valid PostCreate params, BindingResult bindingResult) throws Exception {
+        log.info("params = {}" , params.toString());
 
-        log.info("postCreate = {}" , postCreate.toString());
-        return "Hello World";
+        if (bindingResult.hasErrors()) {
+            List<FieldError> fieldErrors = bindingResult.getFieldErrors();
+            FieldError fieldError = fieldErrors.get(0);
+            String fieldName = fieldError.getField();
+            String errorMessage = fieldError.getDefaultMessage();
+
+            Map<String, String> error = new HashMap<>();
+            error.put(fieldName, errorMessage);
+            return error;
+        }
+
+        return Map.of();
     }
 
 }
