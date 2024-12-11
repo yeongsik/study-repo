@@ -1,0 +1,49 @@
+body {
+    padding-top: 60px; /* 헤더 높이만큼 여백 추가 */
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    z-index: 1050; /* 헤더를 최상단으로 유지 */
+}
+
+.nav-link {
+    padding: 0 10px;
+    color: #555;
+}
+
+.nav-link:hover {
+    color: #007bff;
+}
+
+aside {
+    min-width: 250px;
+}
+
+main {
+    padding: 20px;
+}
+
+.sidebar {
+    transition: transform 0.3s ease;
+}
+
+.sidebar.d-block {
+    transform: translateX(0);
+}
+
+.sidebar.d-none {
+    transform: translateX(-250px);
+}
+
+.main-content {
+    transition: margin-left 0.3s ease;
+}
+
+.card {
+    transition: transform 0.3s ease;
+}
+.card:hover {
+    transform: scale(1.05);
+}
