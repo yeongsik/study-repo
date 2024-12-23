@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- 문서의 문자 인코딩을 설정   -->
+    <meta charset="UTF-8">
+    <!-- 반응형 웹을 위한 뷰포트 설정    -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 페이지 설명을 정의하여 검색 엔진 최적화(SEO)에 도움을 줍니다    -->
+    <meta name="description" content="This is a sample webpage about learning HTML.">
+
+    <!--  페이지와 관련된 키워드 (검색 엔진 참고용, 현재는 잘 사용되지 않음).  -->
+    <meta name="keywords" content="HTML, CSS, Web Development">
+
+    <!-- 페이지 작성자를 지정.    -->
+    <meta name="author" content="John Doe">
+    <!-- Open Graph (OG) 메타 태그: 페이스북, 트위터 등에서 콘텐츠를 공유할 때 미리보기를 구성합니다.  -->
+    <meta property="og:title" content="My Web Page">
+    <meta property="og:description" content="Learn HTML step by step.">
+    <meta property="og:image" content="thumbnail.jpg">
+    <meta property="og:url" content="https://example.com">
+
+    <!-- Twitter Cards: 트위터에서의 미리보기를 설정.  -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="My Web Page">
+    <meta name="twitter:description" content="Learn HTML step by step.">
+    <meta name="twitter:image" content="thumbnail.jpg">
+
+    <!-- HTML 문서 제목, 브라우저 탭 바에 표시  -->
+    <title>My First HTML Page</title>
+</head>
+<body>
+<header>
+    <h1>Welcome to My Website</h1>
+    <!-- 탐색 링크를 그룹화해주는 시맨틱 태그 , 내비게이션 메뉴에 사용  -->
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section id="home">
+        <h2>Home</h2>
+        <p>This is the home section of the website.</p>
+    </section>
+    <section id="about">
+        <h2>About</h2>
+        <p>Here is some information about the website or its creator.</p>
+    </section>
+    <section id="contact">
+        <h2>Contact</h2>
+        <p>Feel free to reach out through the contact form below.</p>
+        <form>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <br>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <br>
+            <button type="submit">Submit</button>
+        </form>
+    </section>
+    <section class="featured-cards">
+        <h1>Featured Articles</h1>
+        <article class="card">
+            <img src="card1.jpg" alt="Card 1">
+            <div class="card-content">
+                <h2>Article Title 1</h2>
+                <p>This is a description of the first article. It highlights key details.</p>
+                <a href="#" class="btn">Read More</a>
+            </div>
+        </article>
+        <article class="card">
+            <img src="card2.jpg" alt="Card 2">
+            <div class="card-content">
+                <h2>Article Title 2</h2>
+                <p>This is a description of the second article. It focuses on another topic.</p>
+                <a href="#" class="btn">Read More</a>
+            </div>
+        </article>
+        <article class="card">
+            <img src="card3.jpg" alt="Card 3">
+            <div class="card-content">
+                <h2>Article Title 3</h2>
+                <p>This is a description of the third article. Learn something new!</p>
+                <a href="#" class="btn">Read More</a>
+            </div>
+        </article>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2024 My Website. All rights reserved.</p>
+</footer>
+</body>
+</html>
