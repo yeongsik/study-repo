@@ -16,4 +16,23 @@ public class OrderItem {
     public int getQuantity() {
         return quantity;
     }
+
+    public void checkStock() {
+        product.checkStock(quantity);
+    }
+
+    public void calculateStock() {
+
+        product.calculateStock(quantity);
+    }
+
+    public Integer calculateFee() {
+        return quantity * product.getPrice();
+    }
+
+    public void cancelOrder() {
+
+        product.cancelOrder(quantity);
+
+    }
 }
