@@ -23,14 +23,14 @@ public class Product {
     public String getName() {
         return name;
     }
-    private double getPrice() {
+    public double getPrice() {
         return price;
     }
-    private String getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public String ToString() {
+    public String toString() {
         return "Product{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
